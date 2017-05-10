@@ -1,0 +1,39 @@
+
+{% extends 'dinner/base.html' %}
+{% block title %}Home{%endblock%}
+{% block content %}
+
+<script language="JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script>
+function check() {
+    if ($('#dinnerDate').val() != '')
+        $('#btnDinnerDate').removeAttr('disabled');
+    else
+        $('#btnDinnerDate').attr('disabled','disable');
+}
+</script>
+
+
+<div class="container-fluid">
+  <div class="row content">
+      <form method="post" action="/menu/">{% csrf_token %}
+         <div class="col-sm-2 sidenav"></div>
+         <div class="col-sm-3 sidenav">
+             <ul class="nav nav-pills nav-stacked">
+              <li><label>Оберіть дату замовлення: </label></li>
+              <li><input type="date" class="form-control" id="dinnerDate" onchange="check();" name="dinnerDate" placeholder="Виберіть день"></li>
+             </ul><br>
+         </div>
+      <div class="col-sm-1 sidenav"></div>
+         <div class="col-sm-2 sidenav"style="margin-top: 2vw">
+            <ul class="nav nav-pills nav-stacked">
+                 <li><button type="submit" id="btnDinnerDate" disabled="disabled" class="btn btn-info">Підтвердити</button></li>
+            </ul><br>
+         </div>
+      </form>
+  </div>
+</div>
+
+
+
+{%endblock%}

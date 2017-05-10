@@ -1,0 +1,74 @@
+{% extends 'dinner/base.html' %}
+{% block title %}Home{%endblock%}
+{% block content %}
+<script language="JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script>
+function addFood(foodName, categoryId) {
+        $('#aaa').text(foodName);
+        $('#bbb').text(categoryId);
+        document.getElementById(categoryId).innerHTML = foodName;
+}
+</script>
+    <label>Твоє замовлення на:</label>
+<label>{{date}}</label>
+<div class="container-fluid">
+  <div class="row content">
+         <div class="col-sm-10 sidenav">
+             <!--<label>Ваше замовлення:</label>-->
+             <ul class="nav nav-pills nav-stacked">
+             <table class="table table-bordered">
+                    <thead>
+                      <tr >
+                        {%for category in menu%}
+                          <th style="background-color: snow"> {{category.categoryName}} <span style="color:#CC3434">{{category.categoryPrice}} грн.</span></th>
+                        {%endfor%}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {%for category in menu%}
+                          <td><label id="{{category.id}}">-</label></td>
+                        {%endfor%}
+                      </tr>
+                    </tbody>
+                  </table>
+             </ul><br>
+         </div>
+
+         <div class="col-sm-2 sidenav">
+             <label style="text-align: center">00.00 грн</label>
+                <div>
+                    <button type="submit"  class="btn btn-info">Замовити</button>
+               </div>
+         </div>
+   </div>
+</div>
+<div style="margin-left: 2vw">
+    {%for m in menu%}
+    <h3 style="font-style: italic"><b>{{m.categoryName}}</b></h3>
+        <div class="container">
+          <div class="row">
+           {%for i in foods%}
+              {%if i.foodCategory.id == m.id%}
+                <div class="col-sm-2">
+                      <div>
+                        <div  style="color: #447e9b">{{i.foodName}}</div>
+                        <div ><img  src="{{i.foodImage}}" class="img-rounded" alt="Cinque Terre" width="125" height="100"></div>
+                        <div style="color: darkred">{{m.categoryPrice}} грн.
+                            <button id="{{i.foodName}}" onclick="addFood('{{i.foodName}}','{{m.id}}')" type="button" class="btn btn-info glyphicon glyphicon-ok"  style="text-align: right" name="{{i.id}}">Додати</button>
+                        </div>
+                      </div>
+                </div>
+              {%endif%}
+            {%endfor%}
+          </div>
+        </div><br>
+    {%endfor%}
+
+</div>
+
+
+
+
+
+{%endblock%}

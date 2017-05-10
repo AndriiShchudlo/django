@@ -1,0 +1,60 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title%} {%endblock%}&ndash;</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link  href="{% static 'dinner/style.css' %}" rel="stylesheet">
+  <script src="{% static 'dinner/style.css' %}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="info" style="background-color: #79aec8">
+  <div class="container text-center">
+    <h1>Online Store</h1>
+    <p>dinner</p>
+  </div>
+</div>
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      {%if user.username%}
+        <a class="navbar-brand glyphicon glyphicon-user " href="#">{{user.username}}</a>
+      {%else%}
+       <a class="navbar-brand glyphicon glyphicon-user " href="/login/"> Авторизуйтесь в системі</a>
+      {%endif%}
+    </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+
+
+        <li><a class="glyphicon glyphicon-home " href="/">Головна</a></li>
+         {%if user.username%}
+        <li><a class="glyphicon glyphicon-shopping-cart" href="/basket/">Історія_Замовлення</a></li>
+        <li><a  class="glyphicon glyphicon-log-out" href="/logout/">Вийти</a></li>
+        {%else%}
+          <li><a  class="glyphicon glyphicon-log-in" href="/login/"> Увійти</a></li>
+        {%endif%}
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{%if user.username%}
+  {%block content%} {%endblock%}
+
+{%endif%}
+
+</body>
+</html>
