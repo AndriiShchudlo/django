@@ -1,46 +1,69 @@
 {% extends 'dinner/base.html' %}
 {% block title %}Home{%endblock%}
 {% block content %}
+
 <script language="JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script>
 function addFood(foodName, categoryId) {
-        $('#aaa').text(foodName);
-        $('#bbb').text(categoryId);
-        document.getElementById(categoryId).innerHTML = foodName;
+    document.getElementById(categoryId).innerHTML = foodName;
+    foods = {
+    'first': document.getElementById(1).innerHTML,
+    'garnir': document.getElementById(2).innerHTML,
+    'salat': document.getElementById(3).innerHTML ,
+    'miasne': document.getElementById(4).innerHTML,
+    'fruits': document.getElementById(5).innerHTML,
+    'complex': document.getElementById(6).innerHTML,
+    }
+    $.ajax({
+        type: 'GET',
+        async: true,
+        url: '/get_price/',
+        data: foods,
+        success: function(data) {
+        $('#price').text(data.price);
+
+},
+dataType: 'json',
+});
 }
 </script>
+
+
+
+
+
+
     <label>Твоє замовлення на:</label>
 <label>{{date}}</label>
 <div class="container-fluid">
   <div class="row content">
-         <div class="col-sm-10 sidenav">
+         <div class="col-sm-12 sidenav">
              <!--<label>Ваше замовлення:</label>-->
              <ul class="nav nav-pills nav-stacked">
-             <table class="table table-bordered">
+             <table id="tableFoods" class="table table-bordered">
                     <thead>
                       <tr >
                         {%for category in menu%}
-                          <th style="background-color: snow"> {{category.categoryName}} <span style="color:#CC3434">{{category.categoryPrice}} грн.</span></th>
+                          <th style="background-color: snow"><label>{{category.categoryName}}</label><span style="color:#CC3434">{{category.categoryPrice}} грн.</span></th>
                         {%endfor%}
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr id="foodsInTable">
                         {%for category in menu%}
-                          <td><label id="{{category.id}}">-</label></td>
+                          <td><label id="{{category.id}}"></label></td>
                         {%endfor%}
                       </tr>
                     </tbody>
                   </table>
+                     <button type="submit"  class="btn btn-info">Обрахувати</button>
+                     <button type="submit"  class="btn btn-info">Замовити</button>
+                     <label id="price" style="text-align: center">0</label>
+                    <label>грн</label>
              </ul><br>
          </div>
 
-         <div class="col-sm-2 sidenav">
-             <label style="text-align: center">00.00 грн</label>
-                <div>
-                    <button type="submit"  class="btn btn-info">Замовити</button>
-               </div>
-         </div>
+
    </div>
 </div>
 <div style="margin-left: 2vw">

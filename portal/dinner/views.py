@@ -8,9 +8,12 @@ from django.contrib import auth
 from dinner.models import Food, Menu
 from django.shortcuts import render_to_response, redirect
 from django.contrib import auth
-
 from django.template.context_processors import csrf
 from workWithDate import Date
+import json as simplejson
+from django.http import HttpResponse
+import json
+
 
 def get_user(request):
     username = None
@@ -70,5 +73,43 @@ def dinnerMenu(request):
     return render(request,'dinner/dinnerMenu.html', datas)
 
 def home(request):
-
     return render(request, 'dinner/home.html', {})
+
+def getPrice(request):
+    first = request.GET.get('first','')
+    garnir = request.GET.get('garnir','')
+    salat = request.GET.get('salat','')
+    miasne =  request.GET.get('miasne','')
+    fruits =  request.GET.get('fruits','')
+    complex =  request.GET.get('complex','')
+
+    count = 0
+
+    if (first != "" and garnir!="" and salat!="" and miasne!=""):       #1+2(гарнір+м"ясне)+салат
+        count = count + 45
+    elif(first == "" and garnir!="" and salat!="" and miasne!=""):      #2(гарнір+м"ясне)+салат
+        count = count+39
+    elif (first != "" and garnir != "" and salat == "" and miasne != ""): #1+2(гарнір+м"ясне)
+        count = count + 39
+    elif (first != "" and garnir == "" and salat != "" and miasne != ""):
+        count = count + 39
+    elif (first != "" and garnir == "" and salat == "" and miasne == ""):  #only first
+        count = count + 12
+    elif (first == "" and garnir != "" and salat == "" and miasne == ""):   # only garnir
+        count = count + 12
+    elif (first == "" and garnir == "" and salat == "" and miasne != ""): # miasne
+        count = count + 27
+    elif (first == "" and garnir == "" and salat != "" and miasne == ""): #salat
+        count = count + 12
+    elif (first != "" and garnir != "" and salat == "" and miasne == ""):  # перше + гарнір
+        count = count + 24
+    elif (first != "" and garnir != "" and salat != "" and miasne == ""):  # перше + гарнір + салат
+        count = count + 36
+    elif (first != "" and garnir == "" and salat != "" and miasne == ""):  # перше + салат
+        count = count + 24
+    if (fruits!=""):
+        count = count+16
+    if (complex!=""):
+        count = count+33
+    res ={'price': count}
+    return HttpResponse(json.dumps(res), content_type='application/json')

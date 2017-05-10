@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^basket/', views.basket, name="bascket"),
     url(r'^loginSys/', views.loginSys, name="loginSys"),
     url(r'^logout/', views.logout, name="logout"),
-
+    url(r'^get_price/', views.getPrice, name="getPrice"),
 ]

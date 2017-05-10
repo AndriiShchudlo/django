@@ -21,6 +21,8 @@ class Menu(models.Model):
     categoryPrice = models.FloatField()
     def __str__(self):
         return self.categoryName
+    # def __unicode__(self):
+    #     return u'%s %s' %(self.categoryName)
 
 
 class Food(models.Model):
