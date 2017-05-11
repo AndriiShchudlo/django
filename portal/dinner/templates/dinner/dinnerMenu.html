@@ -14,6 +14,7 @@ function addFood(foodName, categoryId) {
     'fruits': document.getElementById(5).innerHTML,
     'complex': document.getElementById(6).innerHTML,
     }
+
     $.ajax({
         type: 'GET',
         async: true,
@@ -21,77 +22,102 @@ function addFood(foodName, categoryId) {
         data: foods,
         success: function(data) {
         $('#price').text(data.price);
-
+},
+dataType: 'json',
+});
+    if ($('#price').text() != '')
+        $('#customDinner_btn').removeAttr('disabled');
+    else
+        $('#customDinner_btn').attr('disabled','disable');
+}
+function customDinner() {
+    foods = {
+    'first': document.getElementById(1).innerHTML,
+    'garnir': document.getElementById(2).innerHTML,
+    'salat': document.getElementById(3).innerHTML ,
+    'miasne': document.getElementById(4).innerHTML,
+    'fruits': document.getElementById(5).innerHTML,
+    'complex': document.getElementById(6).innerHTML,
+    'dinnerDate': document.getElementById("dinnerDate").innerHTML,
+    }
+    $.ajax({
+        type: 'GET',
+        async: true,
+        url: '/addDinner/',
+        data: foods,
+        success: function(data) {
+        $('#1').text("");
+        $('#2').text("");
+        $('#3').text("");
+        $('#4').text("");
+        $('#5').text("");
+        $('#6').text("");
+        $('#price').text("");
+        if (data=="True"){
+            $('#confirmation').text("Замовлення успішно виконане. Ви можете покинути сайт, або зробити ще одне замовлення. Для зміни дати замовлення перейдіть на головну сторінку")
+        }
 },
 dataType: 'json',
 });
 }
 </script>
-
-
-
-
-
-
     <label>Твоє замовлення на:</label>
-<label>{{date}}</label>
+    <label style="color: darkolivegreen" id="dinnerDate">{{date}}</label>
 <div class="container-fluid">
   <div class="row content">
          <div class="col-sm-12 sidenav">
-             <!--<label>Ваше замовлення:</label>-->
              <ul class="nav nav-pills nav-stacked">
-             <table id="tableFoods" class="table table-bordered">
-                    <thead>
-                      <tr >
-                        {%for category in menu%}
-                          <th style="background-color: snow"><label>{{category.categoryName}}</label><span style="color:#CC3434">{{category.categoryPrice}} грн.</span></th>
-                        {%endfor%}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="foodsInTable">
-                        {%for category in menu%}
-                          <td><label id="{{category.id}}"></label></td>
-                        {%endfor%}
-                      </tr>
-                    </tbody>
-                  </table>
-                     <button type="submit"  class="btn btn-info">Обрахувати</button>
-                     <button type="submit"  class="btn btn-info">Замовити</button>
+                 <table id="tableFoods" class="table table-bordered">
+                     <thead>
+                        <tr >
+                          {%for category in menu%}
+                            <th style="background-color: snow"><label>{{category.categoryName}}</label><span style="color:#CC3434">{{category.categoryPrice}} грн.</span></th>
+                          {%endfor%}
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr id="foodsInTable">
+                          {%for category in menu%}
+                            <td><label id="{{category.id}}"></label></td>
+                          {%endfor%}
+                        </tr>
+                     </tbody>
+                 </table>
+                     <button  id="customDinner_btn" name="customDinner_btn" type="submit" onclick="customDinner()" disabled="disabled" class="btn btn-success">Замовити обід</button>
                      <label id="price" style="text-align: center">0</label>
                     <label>грн</label>
+                    <h2 style="color: darkolivegreen" id="confirmation"></h2>
              </ul><br>
          </div>
-
-
    </div>
 </div>
 <div style="margin-left: 2vw">
+   <div class="row">
+        {%for m in menu%}
+         <div class="col-sm-2">
+             <h3 style="font-style: italic"><b>{{m.categoryName}}</b></h3>
+         </div>
+        {%endfor%}
+   </div>
+</div>
+<div style="margin-left: 2vw">
+<div class="row">
     {%for m in menu%}
-    <h3 style="font-style: italic"><b>{{m.categoryName}}</b></h3>
-        <div class="container">
-          <div class="row">
-           {%for i in foods%}
-              {%if i.foodCategory.id == m.id%}
-                <div class="col-sm-2">
-                      <div>
-                        <div  style="color: #447e9b">{{i.foodName}}</div>
-                        <div ><img  src="{{i.foodImage}}" class="img-rounded" alt="Cinque Terre" width="125" height="100"></div>
-                        <div style="color: darkred">{{m.categoryPrice}} грн.
-                            <button id="{{i.foodName}}" onclick="addFood('{{i.foodName}}','{{m.id}}')" type="button" class="btn btn-info glyphicon glyphicon-ok"  style="text-align: right" name="{{i.id}}">Додати</button>
-                        </div>
-                      </div>
-                </div>
-              {%endif%}
-            {%endfor%}
-          </div>
-        </div><br>
-    {%endfor%}
-
+     <div class="col-sm-2">
+             {%for i in foods%}
+             {%if i.foodCategory.id == m.id%}
+             <div style="color: blue" >{{i.foodName}}</div>
+             <div ><img  src="{{i.foodImage}}" class="img-rounded" alt="Cinque Terre" width="125" height="100"></div>
+             <button id="{{i.foodName}}" onclick="addFood('{{i.foodName}}','{{m.id}}')" type="button" class="btn btn-success glyphicon glyphicon-ok"  style="text-align: right" name="{{i.id}}">Додати</button>
+                <hr>
+             {%endif%}
+             {%endfor%}
+         </div>
+       {%endfor%}
+   </div>
 </div>
 
-
-
-
-
+<footer  class="container-fluid text-center" style="background-color: darkolivegreen">
+  <h2 style="font-style: italic">Смачного</h2>
+</footer>
 {%endblock%}

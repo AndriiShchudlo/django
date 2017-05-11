@@ -12,9 +12,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="info" style="background-color: #79aec8">
+<div class="info" style="background-color: darkolivegreen">
   <div class="container text-center">
-    <h1>Online Store</h1>
+    <h1 style="color: white">Quintagroup</h1>
     <p>dinner</p>
   </div>
 </div>
@@ -38,9 +38,9 @@
       <ul class="nav navbar-nav navbar-right">
 
 
-        <li><a class="glyphicon glyphicon-home " href="/">Головна</a></li>
+        <li><a id="home_page" class="glyphicon glyphicon-home " href="/">Головна</a></li>
          {%if user.username%}
-        <li><a class="glyphicon glyphicon-shopping-cart" href="/basket/">Історія_Замовлення</a></li>
+        <li><a class="glyphicon glyphicon-shopping-cart" href="/orders/">Історія_Замовлення</a></li>
         <li><a  class="glyphicon glyphicon-log-out" href="/logout/">Вийти</a></li>
         {%else%}
           <li><a  class="glyphicon glyphicon-log-in" href="/login/"> Увійти</a></li>
