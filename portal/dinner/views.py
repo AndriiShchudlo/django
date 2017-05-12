@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import datetime
 from django.shortcuts import render
 
-from dinner.models import Food, Menu, CustomFood
+from dinner.models import Eating, Menu, CustomFood
 from django.shortcuts import render_to_response, redirect
 from django.contrib import auth
 from django.template.context_processors import csrf
@@ -46,7 +46,7 @@ def logout(request):
      return redirect('/')
 
 def dinnerMenu(request):
-    food = Food.objects.all()
+    food = Eating.objects.all()
     menu = Menu.objects.all()
     foodDay = request.POST.get('dinnerDate', '')
     enterDate = foodDay.split("-")

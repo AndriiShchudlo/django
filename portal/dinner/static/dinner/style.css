@@ -1,4 +1,7 @@
- .login_error {
+.emblem_style{
+    color: white;
+}
+.login_error {
      background-color: red;
  }
  .container_table{
@@ -13,4 +16,25 @@
 }
 .table_head{
     background-color: darkolivegreen;
+}
+
+.poster{
+    position:relative;
+}
+.descr{
+   position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    top:0;
+    background:rgba(255,255,255, 0.7);
+    padding:5px;
+    display:none;
+}
+.poster:hover .descr{
+  display:block;
+
+}
+.trash_color_style:hover{
+    color: red;
 }

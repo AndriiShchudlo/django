@@ -5,16 +5,18 @@
   <title>{% block title%} {%endblock%}&ndash;</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="{% static 'dinner/style.css' %}"></script>
+  <script src="{% static '/dinner/script.js' %}"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{% static '/dinner/style.css' %}">
+
 </head>
+
 <body>
 <div class="info" style="background-color: darkolivegreen">
-  <div class="container text-center">
-    <h1 style="color: white">Quintagroup</h1>
+  <div class="container text-center ">
+    <h1 class="emblem_style">Quintagroup</h1>
     <p>dinner</p>
   </div>
 </div>
@@ -57,6 +59,7 @@
 <div style="text-align: center">
   <h1 style="color: darkolivegreen">Система для замовлень обідів</h1>
   <h3 style="color: darkolivegreen">Для продовження роботи Вам необхідно авторизуватись</h3>
+
 </div>
 {%endif%}
 

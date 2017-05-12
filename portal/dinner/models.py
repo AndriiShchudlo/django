@@ -23,21 +23,6 @@ class Menu(models.Model):
     def __unicode__(self):
         return self.categoryName
 
-
-class Food(models.Model):
-    class Meta:
-        db_table = "food"
-    foodName = models.TextField()
-    foodImage = models.TextField(default=None)
-    foodCategory = models.ForeignKey(Menu)
-    foodDay = models.ForeignKey(FoodDay)
-    def __unicode__(self):
-        return self.foodName
-
-    def __str__(self):
-        return self.foodName
-
-
 class CustomFood(models.Model):
     class Meta:
         db_table = "customFood"
@@ -60,3 +45,16 @@ class CustomFood(models.Model):
     def __str__(self):
         return self.customUserName
 
+class Eating(models.Model):
+    class Meta:
+        db_table = "eating"
+    foodName = models.TextField()
+    foodDescriptions = models.TextField()
+    foodImage = models.TextField(default=None)
+    foodCategory = models.ForeignKey(Menu)
+    foodDay = models.ForeignKey(FoodDay)
+    def __unicode__(self):
+        return "{0}, {1}".format(self.foodName, self.foodDescriptions)
+
+    def __str__(self):
+        return self.foodName
