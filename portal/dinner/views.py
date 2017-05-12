@@ -12,7 +12,7 @@ from django.http import HttpResponse
 import json
 from calculatePrice import CalculatePrice
 from addDinner import AddDinner
-
+from django.contrib.auth.forms import UserCreationForm
 
 def get_user(request):
     username = None
@@ -82,3 +82,20 @@ def reviewOrders(request):
     username = request.user.username
     orders = CustomFood.objects.filter(customUserName=username)[:]
     return render(request, 'dinner/reviewOrders.html', {'orders': orders})
+
+def register(request):
+    args = {}
+    args.update(csrf(request))
+    args['form'] = UserCreationForm()
+    if request.POST:
+        newuser_form = UserCreationForm(request.POST)
+        if newuser_form.is_valid():
+            newuser_form.save()
+            newuser = auth.authenticate(username=newuser_form.cleaned_data['username'], password=newuser_form.cleaned_data['password2'])
+            auth.login(request,newuser)
+            return redirect('')
+        else:
+            args['form'] = newuser_form
+    return render_to_response('register.html', args)
+
+
