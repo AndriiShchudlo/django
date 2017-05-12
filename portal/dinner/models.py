@@ -59,3 +59,4 @@ class CustomFood(models.Model):
 
     def __str__(self):
         return self.customUserName
+
