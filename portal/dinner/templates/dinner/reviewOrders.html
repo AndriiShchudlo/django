@@ -1,7 +1,55 @@
 {% extends 'dinner/base.html' %}
 {% block title %} Home {%endblock%}
 {% block content %}
+<div style="text-align: center">
+    <h2>Мої замовлення:</h2>
+</div>
 
-<h2>kowuk</h2>
 
+
+<div class="panel">
+    <div class="container_table">
+        <table id="myTable" class="table table-fixedheader table-bordered ">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Ім'я</th>
+                    <th>Прізвище</th>
+                    <th>Перше</th>
+                    <th>Гарнір</th>
+                    <th>Салат</th>
+                    <th>М'ясне</th>
+                    <th>Фрукти</th>
+                    <th>комплексне друге</th>
+                    <th>Дата замовлення</th>
+                    <th>Дата доставки</th>
+                    <th>Сума (грн)</th>
+                </tr>
+            </thead>
+            <tbody style="height:110px">
+             {%for i in orders%}
+                <tr>
+                    <td>{{i.customUserName}}</td>
+                    <td>{{i.customFirstName}}</td>
+                    <td>{{i.customLastName}}</td>
+                    <td>{{i.firstFood}}</td>
+                    <td>{{i.garnish}}</td>
+                    <td>{{i.salad}}</td>
+                    <td>{{i.meatDish}}</td>
+                    <td>{{i.fruits}}</td>
+                    <td>{{i.complex}}</td>
+                    <td>{{i.customDate}}</td>
+                    <td>{{i.dinnerDate}}</td>
+                    <td>{{i.customPrice}}</td>
+                </tr>
+                 {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<footer  class="container-fluid text-center foter_style">
+  <h2 class="">Смачного</h2>
+</footer>
 {%endblock%}

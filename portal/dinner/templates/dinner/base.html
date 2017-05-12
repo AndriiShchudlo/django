@@ -5,11 +5,11 @@
   <title>{% block title%} {%endblock%}&ndash;</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link  href="{% static 'dinner/style.css' %}" rel="stylesheet">
   <script src="{% static 'dinner/style.css' %}"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static '/dinner/style.css' %}">
 </head>
 <body>
 <div class="info" style="background-color: darkolivegreen">
@@ -30,7 +30,7 @@
       {%if user.username%}
         <a class="navbar-brand glyphicon glyphicon-user " href="#">{{user.username}}</a>
       {%else%}
-       <a class="navbar-brand glyphicon glyphicon-user " href="/login/"> Авторизуйтесь в системі</a>
+       <a class="navbar-brand glyphicon glyphicon-user " href="/login/"></a>
       {%endif%}
     </div>
 
@@ -53,7 +53,11 @@
 
 {%if user.username%}
   {%block content%} {%endblock%}
-
+{%else%}
+<div style="text-align: center">
+  <h1 style="color: darkolivegreen">Система для замовлень обідів</h1>
+  <h3 style="color: darkolivegreen">Для продовження роботи Вам необхідно авторизуватись</h3>
+</div>
 {%endif%}
 
 </body>

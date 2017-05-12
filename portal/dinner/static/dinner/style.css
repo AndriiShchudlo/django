@@ -1,29 +1,26 @@
 
- .navbar {
-      margin-bottom: 50px;
-      border-radius: 0;
-    }
-
-    /* Remove the jumbotron's default bottom margin */
-     .jumbotron {
-      margin-bottom: 0;
-    }
-
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-.avtoriz_style{
-    text-align: center;
+.poster{
+    position:relative;
+    margin:100px auto;
+    background:#ff6600;
+    height:200px;
+    width:150px;
 }
-.login_error{
-    background-color: red;
+.descr{
+    display:none;
+    margin-left:-350px;
+    padding:10px;
+    margin-top:17px;
+    background:#f3f3f3;
+    height:200px;
+    -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    box-shadow:0 5px 5px rgba(0,0,0,0.3);
 }
-.food_block{
-    width: 20px;
-    height: 20px;
-}
-.food_name_style{
-    color: red;
+.poster:hover .descr{
+    display:block;
+    position:absolute;
+    top:120px;
+    z-index:9999;
+    width:400px;
 }

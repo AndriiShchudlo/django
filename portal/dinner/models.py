@@ -58,4 +58,4 @@ class CustomFood(models.Model):
         return "{0}, {1}".format(self.customFirstName, self.customLastName, self.firstFood,self.garnish,self.salad,self.meatDish, self.fruits,self.complex)
 
     def __str__(self):
-        return self.dinnerDate
+        return self.customUserName

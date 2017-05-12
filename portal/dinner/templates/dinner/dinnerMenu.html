@@ -91,7 +91,7 @@ dataType: 'json',
          </div>
    </div>
 </div>
-<div style="margin-left: 2vw">
+<div style="margin-left: 1vw">
    <div class="row">
         {%for m in menu%}
          <div class="col-sm-2">
@@ -100,24 +100,37 @@ dataType: 'json',
         {%endfor%}
    </div>
 </div>
-<div style="margin-left: 2vw">
+<div style="margin-left: 1vw">
 <div class="row">
     {%for m in menu%}
      <div class="col-sm-2">
              {%for i in foods%}
-             {%if i.foodCategory.id == m.id%}
-             <div style="color: blue" >{{i.foodName}}</div>
-             <div ><img  src="{{i.foodImage}}" class="img-rounded" alt="Cinque Terre" width="125" height="100"></div>
-             <button id="{{i.foodName}}" onclick="addFood('{{i.foodName}}','{{m.id}}')" type="button" class="btn btn-success glyphicon glyphicon-ok"  style="text-align: right" name="{{i.id}}">Додати</button>
-                <hr>
-             {%endif%}
+                {%if openDateFood == 6 or openDateFood == 7%}
+                {%else%}
+                     {%if i.foodCategory.id == m.id%}
+                         {%if i.foodDay.foodDayNumber == openDateFood or i.foodDay.foodDayNumber == 8%}
+                         <div style="color: blue" >{{i.foodName}}</div>
+                         <div ><img  src="{{i.foodImage}}" class="img-rounded" alt="Cinque Terre" width="125" height="100"></div>
+                         <button id="{{i.foodName}}" onclick="addFood('{{i.foodName}}','{{m.id}}')" type="button" class="btn btn-success glyphicon glyphicon-ok"  style="text-align: right" name="{{i.id}}">Додати</button>
+                            <hr>
+                         {%endif%}
+                     {%endif%}
+                {%endif%}
              {%endfor%}
          </div>
-       {%endfor%}
+     {%endfor%}
    </div>
 </div>
 
-<footer  class="container-fluid text-center" style="background-color: darkolivegreen">
-  <h2 style="font-style: italic">Смачного</h2>
-</footer>
+<!--<div class="poster">-->
+<!--<div class="descr">-->
+<!--Какой-то текст который должен быть в блоке<br>-->
+<!--<a href="#">Интересная ссылка</a>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--<footer  class="container-fluid home_footer" style="bottom: 0" >-->
+  <!--<h2 style="text-align: center">Смачного</h2>-->
+<!--</footer>-->
 {%endblock%}
