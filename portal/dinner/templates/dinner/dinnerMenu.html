@@ -91,19 +91,21 @@ dataType: 'json',
          </div>
    </div>
 </div>
-<div style="margin-left: 1vw">
-   <div class="row">
-        {%for m in menu%}
-         <div class="col-sm-2">
-             <h3 style="font-style: italic"><b>{{m.categoryName}}</b></h3>
-         </div>
-        {%endfor%}
-   </div>
-</div>
+<!--<div style="margin-left: 1vw">-->
+   <!--<div class="row">-->
+        <!--{%for m in menu%}-->
+         <!--<div class="col-sm-2">-->
+             <!--<h3 style="font-style: italic"><b>{{m.categoryName}}</b></h3>-->
+         <!--</div>-->
+        <!--{%endfor%}-->
+   <!--</div>-->
+<!--</div>-->
 <div style="margin-left: 1vw">
 <div class="row">
     {%for m in menu%}
      <div class="col-sm-2">
+         <h3 style="font-style: italic"><b>{{m.categoryName}}</b></h3>
+         <hr>
              {%for i in foods%}
                 {%if openDateFood == 6 or openDateFood == 7%}
                 {%else%}
