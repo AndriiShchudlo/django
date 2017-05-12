@@ -12,5 +12,4 @@ urlpatterns = [
     url(r'^logout/', views.logout, name="logout"),
     url(r'^get_price/', views.getPrice, name="getPrice"),
     url(r'^addDinner/', views.addDinner, name="addDinner"),
-    url(r'^register/', views.register, name="register"),
 ]
