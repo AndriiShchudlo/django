@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import datetime
 from django.shortcuts import render
 
-from dinner.models import Eating, Menu, CustomFood
+from dinner.models import Eating, Menu, FoodsCustom
 from django.shortcuts import render_to_response, redirect
 from django.contrib import auth
 from django.template.context_processors import csrf
@@ -28,11 +28,11 @@ def loginSys(request):
     args.update(csrf(request))
     if request.POST:
         inputUser = request.POST.get('inputUser', '')
-        print inputUser
         inputPassword = request.POST.get('inputPassword', '')
         user = auth.authenticate(username=inputUser, password=inputPassword)
         if user is not None:
             auth.login(request, user)
+
             return redirect('/')
         else:
             args['login_error'] = "Користувач не знайдений"
@@ -79,5 +79,5 @@ def addDinner(request):
 
 def reviewOrders(request):
     username = request.user.username
-    orders = CustomFood.objects.filter(customUserName=username)[:]
+    orders = FoodsCustom.objects.filter(customUserName=username)[:]
     return render(request, 'dinner/reviewOrders.html', {'orders': orders})

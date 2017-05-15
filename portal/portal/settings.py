@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.utils',
     'dinner',
+    'manager',
 ]
 
 MIDDLEWARE = [

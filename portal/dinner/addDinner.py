@@ -2,7 +2,7 @@
 import datetime
 
 from calculatePrice import CalculatePrice
-from dinner.models import CustomFood
+from dinner.models import FoodsCustom
 
 
 class AddDinner(object):
@@ -21,7 +21,7 @@ class AddDinner(object):
         dinnerDate = request.GET.get('dinnerDate', '')
         customPrice = newPrice.getPrice(request)
 
-        customFood = CustomFood(
+        customFood = FoodsCustom(
             customUserName=customUserName,
             customFirstName=customFirstName,
             customLastName=customLastName,

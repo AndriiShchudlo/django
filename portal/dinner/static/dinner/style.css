@@ -5,7 +5,7 @@
      background-color: red;
  }
  .container_table{
-     height: 40vw;
+     height: 25vw;
      overflow: scroll;
 }
 .foter_style{
@@ -37,4 +37,10 @@
 }
 .trash_color_style:hover{
     color: red;
+}
+.color_ok_style:hover{
+    background-color: greenyellow;
+}
+.color_ok_style_no:hover{
+    background-color: red;
 }

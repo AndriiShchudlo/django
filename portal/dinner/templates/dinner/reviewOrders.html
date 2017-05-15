@@ -1,12 +1,16 @@
 {% extends 'dinner/base.html' %}
 {% block title %} Home {%endblock%}
 {% block content %}
+
 <div style="text-align: center">
     <h2>Мої замовлення:</h2>
+    <hr>
 </div>
 
 
-
+ <div class="container">
+     <div class="row">
+        <div class="col-sm-12">
 <div class="panel">
     <div class="container_table">
         <table id="myTable" class="table table-fixedheader table-bordered  ">
@@ -46,8 +50,10 @@
     </div>
 </div>
 
-
-<footer  class="container-fluid text-center foter_style">
-  <h2 class="">Смачного</h2>
-</footer>
+</div>
+     </div>
+     </div>
+<!--<footer  class="container-fluid text-center foter_style">-->
+  <!--<h2 class="">Смачного</h2>-->
+<!--</footer>-->
 {%endblock%}

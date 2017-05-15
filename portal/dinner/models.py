@@ -23,9 +23,12 @@ class Menu(models.Model):
     def __unicode__(self):
         return self.categoryName
 
-class CustomFood(models.Model):
+
+
+
+class FoodsCustom(models.Model):
     class Meta:
-        db_table = "customFood"
+        db_table = "foods_custom"
     customUserName = models.TextField()
     customFirstName = models.TextField()
     customLastName = models.TextField()
@@ -38,12 +41,13 @@ class CustomFood(models.Model):
     customDate = models.DateField()
     dinnerDate = models.DateField()
     customPrice = models.FloatField()
-
+    paymentFood = models.TextField()
     def __unicode__(self):
-        return "{0}, {1}".format(self.customFirstName, self.customLastName, self.firstFood,self.garnish,self.salad,self.meatDish, self.fruits,self.complex)
+        return "{0}, {1}".format(self.customFirstName, self.customLastName, self.firstFood,self.garnish,self.salad,self.meatDish, self.fruits,self.complex,self.paymentFood)
 
     def __str__(self):
         return self.customUserName
+
 
 class Eating(models.Model):
     class Meta:

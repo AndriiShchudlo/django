@@ -11,6 +11,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{% static '/dinner/style.css' %}">
 
+
+
 </head>
 
 <body>
@@ -24,13 +26,17 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+      <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
+        <!--<span class="icon-bar"></span>-->
+        <!--<span class="icon-bar"></span>-->
+        <!--<span class="icon-bar"></span>-->
+      <!--</button>-->
       {%if user.username%}
-        <a class="navbar-brand glyphicon glyphicon-user " href="#">{{user.username}}</a>
+       {%if user.is_superuser%}
+        <a class="navbar-brand glyphicon glyphicon-user " href="#">{{user.username}} <label style="color: red">Адміністратор</label></a>
+       {%else%}
+       <a class="navbar-brand glyphicon glyphicon-user " href="#">{{user.username}}</a>
+       {%endif%}
       {%else%}
        <a class="navbar-brand glyphicon glyphicon-user " href="/login/"></a>
       {%endif%}
@@ -38,8 +44,9 @@
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-
-
+        {%if user.is_superuser%}
+        <li><a id="admin_setting" class="glyphicon glyphicon-cog" href="/manager/">Адміністрування</a></li>
+        {%endif%}
         <li><a id="home_page" class="glyphicon glyphicon-home " href="/">Головна</a></li>
          {%if user.username%}
         <li><a class="glyphicon glyphicon-shopping-cart" href="/orders/">Історія_Замовлення</a></li>
@@ -47,7 +54,6 @@
         {%else%}
           <li><a  class="glyphicon glyphicon-log-in" href="/login/"> Увійти</a></li>
         {%endif%}
-
       </ul>
     </div>
   </div>
@@ -65,3 +71,5 @@
 
 </body>
 </html>
+
+
