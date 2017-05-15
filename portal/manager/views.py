@@ -55,7 +55,9 @@ def download(request):
      sheet.col(0).width = 20000
      sheet.portrait = False
      sheet.set_print_scaling(85)
-     book.save('filename.xls')
+     book.save('ZVIT.xls')
+
+
 
      print book
      print dataFromTable
