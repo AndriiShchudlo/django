@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^manager/', views.getControlPage, name="getControlPage"),
     url(r'^payDinner/', views.payDinner, name="payDinner"),
     url(r'^filterDate/', views.filterDate, name="filterDate"),
-    url(r'^download/', views.download, name="download"),
+    url(r'^debtors/', views.debtors, name="debtors"),
+    url(r'^downloadzvit/', views.downloadzvit, name="downloadzvit"),
 
 ]

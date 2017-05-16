@@ -5,6 +5,33 @@
 {% block content %}
 <script>
 
+function downloadExel() {
+//
+//        var url='data:application/vnd.ms-excel,' + encodeURIComponent($('#tableWrap').html())
+//        location.href=url
+
+
+}
+
+
+
+//        table = {'data':data}
+//    $.ajax({
+//        type: 'GET',
+//        async: true,
+//        url: '/download/',
+//        data: table,
+//        success: function(data) {
+//        $('<iframe src="portal/ZVIT.xls"></iframe>').appendTo('body').hide();
+//
+//
+//},
+//dataType: 'json',
+//});
+//}
+
+
+
 </script>
 {%if user.is_superuser%}
 
@@ -23,9 +50,10 @@
                <button type="submit"   class="btn btn-success">Боржники</button>
           </div>
       </form>
-          <div class="col-sm-3"></div>
-          <div class="col-sm-3"></div>
-
+      <div class="col-sm-3"><button type="submit"   class="btn btn-success">Боржники за весь період</button></div>
+      <div class="col-sm-2">
+           <button class="glyphicon glyphicon-floppy-save btn btn-success " onclick="downloadExel()">Завантажити звіт</button>
+      </div>
   </div>
 </div>
 
@@ -33,14 +61,12 @@
 
 <div class="panel">
     <div class="container_table" style="height: 50vw">
-        <div class="col-sm-3">
-            <a href="/downloadzvit/{{today}}">Скачати звіт</a>
-        </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-3"> <label >Звіт за: {{today}}</label></div>
 
+        <label>Звіт за: {{today}}</label>
 
-
+        <div id="tableWrap">
+            <hr>
+            <p><a href="file.xls" >Скачать файл</a>
         <table id="myTable" class="table table-fixedheader table-bordered ">
             <thead class="table_head">
                 <tr>
@@ -87,6 +113,8 @@
 
 
 
+
+<!--<a href="{{ MEDIA_URL }}/ZVIT.xls" download="">Download</a>-->
 
 
 {%else%}
