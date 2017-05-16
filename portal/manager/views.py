@@ -17,7 +17,7 @@ def getControlPage(request):
     today = datetime.date.today()
     date = today.isoformat()
     orders = FoodsCustom.objects.filter(dinnerDate=today)
-    return render(request, 'manager/homeManager.html', {'orders': orders, 'today':date})
+    return render(request, 'manager/homeManager.html', {'orders': orders, 'today':date,'debtors':'false'})
 
 def payDinner(request):
      print "aaaaaaaaaaaa"
@@ -26,26 +26,25 @@ def payDinner(request):
 def filterDate(request):
      newDate = request.POST.get('newdate', '')
      orders = FoodsCustom.objects.filter(dinnerDate=newDate)
-     return render(request, 'manager/homeManager.html', {'orders': orders, 'today': newDate})
+     return render(request, 'manager/homeManager.html', {'orders': orders, 'today': newDate,'debtors':'false'})
 
 
 def debtors(request):
      today = datetime.date.today()
      newdate = today.isoformat()
      orders = FoodsCustom.objects.filter(paymentFood="")
-     return render(request, 'manager/homeManager.html', {'orders': orders, 'today': newdate})
+     return render(request, 'manager/homeManager.html', {'orders': orders, 'today': newdate, 'debtors':'true'})
 
 def downloadzvit(request):
-     a = request.GET.get('FoodsCustom')
-
-     print type(a)
-     print "sdsdsdsdsdsds"
-
-
-
      today = datetime.date.today()
-     orders = FoodsCustom.objects.filter(dinnerDate=today)
-
+     path = request.path
+     path = path.split("/")
+     date = path[2]
+     debtor = path[3]
+     if debtor=="true":
+          orders = FoodsCustom.objects.filter(paymentFood="")
+     else:
+          orders = FoodsCustom.objects.filter(dinnerDate=date)
 
      book = xlwt.Workbook('utf8')
      font = xlwt.easyxf('font: height 240,name Arial,colour_index black, bold off,\
@@ -79,7 +78,9 @@ def downloadzvit(request):
      sheet.col(10).width = 4000
      sheet.col(11).width = 4000
      sheet.col(12).width = 4000
-     i=0
+
+
+     i = 0
      for data in orders:
           i = i+1
           sheet.write(i, 0, data.customUserName )
@@ -91,19 +92,23 @@ def downloadzvit(request):
           sheet.write(i, 6, data.meatDish)
           sheet.write(i, 7, data.fruits)
           sheet.write(i, 8, data.complex)
-          sheet.write(i, 9, data.customDate)
-          sheet.write(i, 10, data.dinnerDate)
+          sheet.write(i, 9, str(data.customDate))
+          sheet.write(i, 10, str(data.dinnerDate))
           sheet.write(i, 11, data.customPrice)
           sheet.write(i, 12, data.paymentFood)
 
-
-
+     count = 0
+     row = 0
+     for i in orders:
+          count = count + i.customPrice
+          row = row + 1
+     font = xlwt.easyxf('font: height 200,name Arial, bold on')
+     sheet.write(row + 2, 10, "Total",font)
+     sheet.write(row + 2, 11, count, font)
      sheet.portrait = False
      sheet.set_print_scaling(85)
      name = today.isoformat()
      book.save(name+'.xls')
-
-
      filename = name+'.xls'
      content_type = 'application/vnd.ms-excel'
      file_path = os.path.join("../portal/", filename)
@@ -111,6 +116,4 @@ def downloadzvit(request):
      response['Content-Disposition'] = 'attachment; filename=%s' % (
           filename.encode('utf-8') if isinstance(filename, unicode) else filename,
      )
-     # response['Content-Length'] = os.path.getsize('/')
      return response
-     # return HttpResponse(json.dumps(response), content_type='application/json')

@@ -34,7 +34,7 @@
 <div class="panel">
     <div class="container_table" style="height: 50vw">
         <div class="col-sm-3">
-            <a href="/downloadzvit/{{today}}">Скачати звіт</a>
+            <a href="/downloadzvit/{{today}}/{{debtors}}">Скачати звіт</a>
         </div>
         <div class="col-sm-2"></div>
         <div class="col-sm-3"> <label >Звіт за: {{today}}</label></div>
@@ -61,7 +61,6 @@
             </thead>
             <tbody style="height:110px">
              {%for i in orders%}
-
                  <tr>
                     <td>{{i.customUserName}}</td>
                     <td>{{i.customFirstName}}</td>
@@ -75,7 +74,11 @@
                     <td>{{i.customDate}}</td>
                     <td>{{i.dinnerDate}}</td>
                     <td>{{i.customPrice}}</td>
-                    <td>{{i.paymentFood}}</td>
+                     {%if i.paymentFood%}
+                        <td>{{i.paymentFood}}</td>
+                     {%else%}
+                        <td class="pay_style_col" onclick="pay()">{{i.paymentFood}}</td>
+                     {%endif%}
 
                 </tr>
                  {%endfor%}
